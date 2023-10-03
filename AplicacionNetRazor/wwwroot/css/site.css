@@ -1,0 +1,30 @@
+
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 100% !important;    
+    background-color:currentColor;
+}
+
+header {
+    background-color: dimgray !important;
+}
+nav {
+    background-color: dimgray !important;
+}

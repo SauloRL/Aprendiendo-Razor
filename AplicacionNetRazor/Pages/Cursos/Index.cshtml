@@ -1,0 +1,76 @@
+﻿@page
+@model AplicacionNetRazor.Pages.Cursos.IndexModel
+@{
+    ViewData["Title"] = "Lista de Cursos";
+}
+
+
+@if (Model.Mensaje != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.Mensaje
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<main>
+    <div class="card">        
+        <div class="card-header" style="background-color:white !important">
+            <div class="row">
+                <div class="col-sm-6 d-flex align-items-start">
+                    <!-- Para alinear el título arriba -->
+                    <h2 class="text-info">
+                        Lista de cursos
+                    </h2>
+                </div>
+                <div class="col-sm-6 d-flex align-items-end justify-content-end">
+                    <!-- Para alinear el botón abajo y a la derecha -->
+                    <a asp-page="Crear" class="btn btn-primary" style="border-radius: 5px; padding: 10px; text-decoration: none;">
+                        Crear Nuevo Curso
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+
+            <form method="post">
+
+            
+            @if (Model.Cursos.Count() > 0)
+            {
+                <br /><br />
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th class="text-center">@Html.DisplayNameFor(m => m.Cursos.First().id)</th>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.Cursos.First().NombreCurso)</th>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.Cursos.First().CantidadClases)</th>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.Cursos.First().Precio)</th>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.Cursos.First().FechaCreacion)</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                    @foreach (var item in Model.Cursos)
+                    {
+                        <tr>
+                            <td class="text-center">@Html.DisplayFor(m => item.id)</td>
+                            <td class="text-center">@Html.DisplayFor(m => item.NombreCurso)</td>
+                            <td class="text-center">@Html.DisplayFor(m => item.CantidadClases)</td>
+                            <td class="text-center">@Html.DisplayFor(m => item.Precio)</td>
+                            <td class="text-center">@Html.DisplayFor(m => item.FechaCreacion)</td>
+                            <td class="text-center">
+                                <a asp-route-id="@item.id" asp-page="Editar" class="btn btn-success btn-sm" style="border-radius: 5px; text-decoration: none;">Editar</a>
+                                <button asp-page-handler="Borrar" asp-route-id="@item.id" onclick="return confirm('Estás seguro de querer borrar el curso?')" class="btn btn-danger btn-sm">Borrar</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            }
+            else
+            {
+               <p style="color:black">No hay cursos disponibles</p> 
+            }
+            </form>
+        </div>
+    </div>
+</main>
